@@ -19,6 +19,7 @@ struct Page {
 	int id;
 	char* content;
 	struct List* list;
+	int frequency;
 };
 
 struct List{
@@ -46,6 +47,7 @@ struct Page * create_new_page(int id) {
 	newPage->isDirty = 0;
 	newPage->next = NULL;
 	newPage->prev = NULL;
+	newPage->frequency = 1;
 	read_file(newPage);
 	return newPage;
 }

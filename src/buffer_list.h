@@ -7,6 +7,7 @@ struct Page *seek_list(struct List * list, int user_id);
 void insert_list(struct List * list, struct Page *x);
 struct Page * remove_list(struct List * list, struct Page*x);
 struct List * create_new_list();
+struct Page * search_lower_frequency(Struct List* list);
 
 
 struct Page *seek_list(struct List * list, int page_id) {
@@ -70,4 +71,19 @@ struct List * create_new_list() {
 	list->tail = NULL;
 	list->size = 0;
 	return list;
+}
+
+//procura a pagina com menor frequencia em uma lista(LFU)
+struct Page * search_lower_frequency(Struct List* list){
+	struct Page * i = list->head;
+	int lower_frequency = i->frequency;
+	struct Page * x = i;
+	while(i != NULL){
+		if(i->frequency < lower_frequency ){
+			x = i;
+			lower_frequency = i->frequency;
+		}
+		i = i->next;	
+	}
+	return x;
 }
